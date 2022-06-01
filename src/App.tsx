@@ -1,38 +1,59 @@
 import React, {useState} from 'react';
 import './App.css';
+import SockJS from 'sockjs-client';
+import StompJs from 'stompjs';
 
 function App() {
-  const [tempUserId, setTempUserId] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState('');
 
   // for test, skip id setting
   // const [userId, setUserId] = useState("shield41791");
 
-  function changeTempUserId(event: any) {
-    console.log(event.target.value)
-    setTempUserId(event.target.value)
-  }
+  // enter chatroom
+  const connect = (event: any)  => {
+    var inputUserId = (document.getElementById("userId") as HTMLInputElement).value
+    if (inputUserId) {
+      setUserId(inputUserId)
+      alert(`Hello, ${inputUserId}`)
 
-  function startChat() {
-    if (tempUserId) {
-      setUserId(tempUserId)
+      // connect
+      const sock = new SockJS("http://localhost:8080/ws")
+      const stomp = StompJs.over(sock)
+
     }
-    alert(`Hello, ${tempUserId}`)
+
+    // don't refresh
+     event?.preventDefault()
   }
 
+  // send message
   function sendMessage(event: any) {
-    alert("hi")
+    var message = (document.getElementById("message") as HTMLInputElement).value
+    
+    // TODO send message
+    console.log(`${userId} : ${message}`);
+
+
+    // clear textarea
+    (document.getElementById("message") as HTMLInputElement).value = ""
+
+    event.preventDefault();
   }
 
   return (
     <div>
       {!userId ? (
         <div>
-          <input 
-            type="text"
-            onChange={(event) => changeTempUserId(event)}
-            ></input>
-          <button onClick={startChat}>start</button>
+          <form onSubmit={(event) => connect(event)}>
+            <input 
+              type="text"
+              id="userId"
+              // onChange={(event) => changeTempUserId(event)}
+              ></input>
+            <button 
+              // onClick={startChat}
+            >start</button>
+          </form>
         </div>
       ) : (
         <div className={`chatArea`}>
@@ -44,13 +65,15 @@ function App() {
             ></textarea>
           </div>
           <div className={`inputArea`}>
-            <textarea
-              className={`inputTextArea`}
-            ></textarea>
-            <button 
-              className={`sendButton`}
-              onClick={sendMessage}  
-            >send</button>
+            <form onSubmit={(event) => sendMessage(event)}>
+              <textarea
+                className={`inputTextArea`}
+                id="message"
+              ></textarea>
+              <button 
+                className={`sendButton`} 
+              >send</button>
+            </form>
           </div>
         </div>
       )}
