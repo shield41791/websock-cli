@@ -11,7 +11,7 @@ const Chatroom = () => {
   const [message, setMessage] = useState('');
   const [isConnected, setIsConnected] = useState(false);
   
-  const sock = new SockJS("//localhost:8080/ws");
+  const sock = new SockJS("http://localhost:8080/ws");
   const stomp = StompJs.over(sock);
   console.log(`connected : ${stomp.connected}`);
   
