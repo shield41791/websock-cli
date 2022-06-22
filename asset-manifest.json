@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/websock-cli/static/css/main.e7d4846f.css",
+    "main.js": "/websock-cli/static/js/main.f99d4e70.js",
+    "static/js/787.b2702c0d.chunk.js": "/websock-cli/static/js/787.b2702c0d.chunk.js",
+    "index.html": "/websock-cli/index.html",
+    "main.e7d4846f.css.map": "/websock-cli/static/css/main.e7d4846f.css.map",
+    "main.f99d4e70.js.map": "/websock-cli/static/js/main.f99d4e70.js.map",
+    "787.b2702c0d.chunk.js.map": "/websock-cli/static/js/787.b2702c0d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7d4846f.css",
+    "static/js/main.f99d4e70.js"
+  ]
+}
