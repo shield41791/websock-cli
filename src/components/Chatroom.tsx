@@ -3,7 +3,6 @@ import '../styles/Chatroom.css';
 import SockJS from 'sockjs-client';
 import StompJs from 'stompjs';
 import { connect } from 'http2';
-import { Helmet } from "react-helmet";
 
 
 const Chatroom = () => {
@@ -128,10 +127,6 @@ const Chatroom = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>websocket test client</title>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
-      </Helmet>
       {!isConnected ? (
         <div>
           <form onSubmit={(event) => enter(event)}>
