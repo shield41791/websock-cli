@@ -2,16 +2,17 @@ import React, {useState, useRef, useEffect} from 'react';
 import '../styles/Chatroom.css';
 import SockJS from 'sockjs-client';
 import StompJs from 'stompjs';
-import { connect } from 'http2';
-
 
 const Chatroom = () => {
   const [userId, setUserId] = useState('');
   const [message, setMessage] = useState('');
   const [isConnected, setIsConnected] = useState(false);
-  
-  const sock = new SockJS("http://localhost:8080/ws");
+
+  console.log(`serverurl : ${process.env.REACT_APP_ENVIRONMENT}`);
+  // const sock = new SockJS("http://localhost:8080/ws");
+  const sock = new SockJS(process.env.REACT_APP_SERVER_URL!!);
   const stomp = StompJs.over(sock);
+
   console.log(`connected : ${stomp.connected}`);
   
   useEffect(() => {
